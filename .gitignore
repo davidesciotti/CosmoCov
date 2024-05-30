@@ -1,0 +1,4 @@
+covs/output/*
+covs/cov_llll_full
+covs/cov_flat_fft
+covs/cov
