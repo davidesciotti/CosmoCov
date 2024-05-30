@@ -2,3 +2,7 @@ covs/output/*
 covs/cov_llll_full
 covs/cov_flat_fft
 covs/cov
+covs/cov_ssss_full
+covs/cov_ssss_--_full
+*.pdf
+covs/cov_ssss_++_full

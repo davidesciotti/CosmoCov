@@ -43,8 +43,8 @@ def cov2corr(covariance):
 
 # if __name__ == '__main__':
 
-covfile = 'output/out_cov_C01/C01_ssss_++_cov_Ntheta40_Ntomo10_1'  # first block, to test the script
-covfile = 'cov_llll_full'  # first block, to test the script
+# covfile = 'output/out_cov_C01/C01_ssss_--_cov_Ntheta40_Ntomo10_1'  # first block, to test the script
+covfile = 'cov_ssss_--_full'  # first block, to test the script
 
 check_posdef = False
 zbins = 10
@@ -75,7 +75,6 @@ theta_indices = {theta: idx for idx, theta in enumerate(theta_values_out)}
 # default load
 c_g, c_ng, ndata = get_cov(covfile)	
 cov = c_ng+c_g
-
 
 # my load
 cov_g_6d = np.zeros((theta_bins, theta_bins, zbins, zbins, zbins, zbins))
@@ -156,7 +155,8 @@ thetas_arcmin_oc = np.array([  6.        ,   6.7520135 ,   7.59828104,   8.55061
        421.0222972 , 473.79137211, 533.17428976, 600.        ])
 thetas_rad_oc = thetas_arcmin_oc * arcmin_to_deg * deg_to_rad
 
-variance_w_oc = np.genfromtxt('/home/davide/Documenti/Lavoro/Programmi/CosmoCov/covs/output/OneCovariance_2PCF_variances/variance_gg.dat')
+# import OC variances
+variance_w_oc = np.genfromtxt('/home/davide/Documenti/Lavoro/Programmi/CosmoCov/covs/output/OneCovariance_2PCF_variances/variance_xim.dat')
 variance_w_oc_3d = np.zeros((theta_bins, zbins, zbins))
 count = 0
 for theta_i in range(theta_bins):
@@ -169,7 +169,7 @@ for theta_i in range(theta_bins):
 colors = cm.rainbow(np.linspace(0, 1, zbins))
 for zi in range(zbins):
 	uncert_w_cc = np.sqrt(np.diag(cov_g_6d[:, :, zi, zi, zi, zi]))
-	plt.loglog(theta_values_out, xi_gg_3D[:, zi, zi], label=f'z{zi}', c=colors[zi])
+	plt.loglog(theta_values_out, xi_mm_3D[:, zi, zi], label=f'z{zi}', c=colors[zi])
 	plt.loglog(theta_values_out, uncert_w_cc, c=colors[zi], ls=':')
 	plt.loglog(thetas_rad_oc, np.sqrt(variance_w_oc_3d[:, zi, zi]), c=colors[zi], ls='--')
 plt.title('w')
